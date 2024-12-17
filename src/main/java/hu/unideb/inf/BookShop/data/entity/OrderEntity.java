@@ -1,88 +1,68 @@
 package hu.unideb.inf.BookShop.data.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @Column(name = "date")
     private Date date;
+
     @Column(name = "status")
     private String status;
 
-    @ManyToMany(mappedBy = "book")
-    private Set<BookEntity> bookId;
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private UsersEntity users;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity user;
+    @ManyToMany
+    @JoinTable(
+            name = "book_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<BookEntity> books = new HashSet<>();
 
-    public OrderEntity() {
-    }
+    public OrderEntity() {}
 
-    public OrderEntity(long id, Date date, String status) {
-        this.id = id;
+    public OrderEntity(Date date, String status, UsersEntity users) {
         this.date = date;
         this.status = status;
+        this.users = users;
     }
 
-    public long getId() {
-        return id;
-    }
+    // Getters and Setters
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public UsersEntity getUsers() { return users; }
+    public void setUsers(UsersEntity user) { this.users = user; }
+    public Set<BookEntity> getBooks() { return books; }
+    public void setBooks(Set<BookEntity> books) { this.books = books; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Set<BookEntity> getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Set<BookEntity> bookId) {
-        this.bookId = bookId;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
+    // equals and hashCode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderEntity that = (OrderEntity) o;
-        return id == that.id && Objects.equals(date, that.date) && Objects.equals(status, that.status) && Objects.equals(bookId, that.bookId) && Objects.equals(user, that.user);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, status, bookId, user);
+        return Objects.hash(id);
     }
 }
