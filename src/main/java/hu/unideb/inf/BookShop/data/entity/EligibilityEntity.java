@@ -1,6 +1,7 @@
 package hu.unideb.inf.BookShop.data.entity;
 
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,21 +20,37 @@ public class EligibilityEntity {
     @ManyToMany(mappedBy = "eligibilities")
     private Set<UsersEntity> users = new HashSet<>();
 
-    public EligibilityEntity() {}
+    public EligibilityEntity() {
+    }
 
     public EligibilityEntity(String name) {
         this.name = name;
     }
 
-    // Getters and Setters
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public Set<UsersEntity> getUsers() { return users; }
-    public void setUsers(Set<UsersEntity> users) { this.users = users; }
+    public long getId() {
+        return id;
+    }
 
-    // equals and hashCode
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<UsersEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UsersEntity> users) {
+        this.users = users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

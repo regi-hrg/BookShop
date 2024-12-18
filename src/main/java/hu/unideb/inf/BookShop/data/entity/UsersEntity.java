@@ -1,6 +1,7 @@
 package hu.unideb.inf.BookShop.data.entity;
 
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -26,14 +27,11 @@ public class UsersEntity {
     private Set<OrderEntity> orders = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "users_eligibility",
-            joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "eligibility_id")
-    )
+    @JoinTable(name = "users_eligibility", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "eligibility_id"))
     private Set<EligibilityEntity> eligibilities = new HashSet<>();
 
-    public UsersEntity() {}
+    public UsersEntity() {
+    }
 
     public UsersEntity(String name, String email, String password) {
         this.name = name;
@@ -41,21 +39,54 @@ public class UsersEntity {
         this.password = password;
     }
 
-    // Getters and Setters
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public Set<OrderEntity> getOrders() { return orders; }
-    public void setOrders(Set<OrderEntity> orders) { this.orders = orders; }
-    public Set<EligibilityEntity> getEligibilities() { return eligibilities; }
-    public void setEligibilities(Set<EligibilityEntity> eligibilities) { this.eligibilities = eligibilities; }
+    public long getId() {
+        return id;
+    }
 
-    // equals and hashCode
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+    public Set<EligibilityEntity> getEligibilities() {
+        return eligibilities;
+    }
+
+    public void setEligibilities(Set<EligibilityEntity> eligibilities) {
+        this.eligibilities = eligibilities;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
