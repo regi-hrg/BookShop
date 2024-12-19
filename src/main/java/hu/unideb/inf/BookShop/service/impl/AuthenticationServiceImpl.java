@@ -36,20 +36,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public String registration(RegistrationDto dto) {
-        UsersEntity felhasznaloEntity = modelMapper.map(dto, UsersEntity.class);
-        felhasznaloEntity.setPassword(encoder.encode(felhasznaloEntity.getPassword()));
-        EligibilityEntity jog = eligibilityRepository.findByName("FELHASZNALO");
-        if (jog != null) {
-            felhasznaloEntity.setEligibilities(Set.of(jog));
+        UsersEntity usersEntity = modelMapper.map(dto, UsersEntity.class);
+        usersEntity.setPassword(encoder.encode(usersEntity.getPassword()));
+        EligibilityEntity eligibility = eligibilityRepository.findByName("USER");
+        if (eligibility != null) {
+            usersEntity.setEligibilities(Set.of(eligibility));
         } else {
-            jog = new EligibilityEntity(null, "FELHASZNALO");
-            jog = eligibilityRepository.save(jog);
-            felhasznaloEntity.setEligibilities(Set.of(jog));
+            eligibility = new EligibilityEntity(null, "USER");
+            eligibility = eligibilityRepository.save(eligibility);
+            usersEntity.setEligibilities(Set.of(eligibility));
         }
 
-        felhasznaloEntity = usersRepository.save(felhasznaloEntity);
+        usersEntity = usersRepository.save(usersEntity);
 
-        return jwtService.generateToken(felhasznaloEntity);
+        return jwtService.generateToken(usersEntity);
 
     }
 
