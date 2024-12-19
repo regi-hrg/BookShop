@@ -1,0 +1,84 @@
+:root {
+  --rose-primary: #d81b60;
+  --rose-secondary: #000000;
+  --rose-light: #d7d7d7;
+  --text-color: #ffffff;
+}
+
+.register-card {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: var(--rose-light);
+  border: 1px solid var(--rose-secondary);
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.register-title {
+  color: var(--rose-secondary);
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.register-input {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--rose-primary) !important;
+}
+
+.mat-form-field-underline {
+  background-color: var(--rose-primary);
+}
+
+.register-button {
+  background-color: var(--rose-primary);
+  color: var(--text-color);
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #ecfffc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:disabled {
+  background-color: #9e9e9e;
+}
+
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  color: #050505;
+}
+
+.login-link a {
+  color: #ad1457 ;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
