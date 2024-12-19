@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EligibilityRepository extends JpaRepository<EligibilityEntity, Long> {
+    EligibilityEntity findByName(String name);
 }

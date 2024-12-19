@@ -27,9 +27,14 @@ public class UsersEntity  implements UserDetails {
     @OneToMany(mappedBy = "users")
     private Set<OrderEntity> orders = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "users_eligibility", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "eligibility_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_eligibility",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "eligibility_id")
+    )
     private Set<EligibilityEntity> eligibilities = new HashSet<>();
+
 
     public UsersEntity() {
     }

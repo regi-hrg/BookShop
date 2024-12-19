@@ -12,18 +12,16 @@ public class EligibilityEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "eligibilities")
-    private Set<UsersEntity> users = new HashSet<>();
-
     public EligibilityEntity() {
     }
 
-    public EligibilityEntity(String name) {
+    public EligibilityEntity(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -43,24 +41,16 @@ public class EligibilityEntity {
         this.name = name;
     }
 
-    public Set<UsersEntity> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UsersEntity> users) {
-        this.users = users;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EligibilityEntity that = (EligibilityEntity) o;
-        return id == that.id;
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name);
     }
 }
