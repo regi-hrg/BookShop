@@ -1,14 +1,15 @@
 package hu.unideb.inf.BookShop.data.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class UsersEntity {
+public class UsersEntity  implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +18,7 @@ public class UsersEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password")
@@ -63,8 +64,22 @@ public class UsersEntity {
         this.email = email;
     }
 
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for(EligibilityEntity j : eligibilities){
+            authorities.add(new SimpleGrantedAuthority(j.getName()));
+        }
+
+        return authorities;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     public void setPassword(String password) {
@@ -91,12 +106,12 @@ public class UsersEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsersEntity that = (UsersEntity) o;
-        return id == that.id;
+        UsersEntity entity = (UsersEntity) o;
+        return id == entity.id && Objects.equals(name, entity.name) && Objects.equals(email, entity.email) && Objects.equals(password, entity.password) && Objects.equals(orders, entity.orders) && Objects.equals(eligibilities, entity.eligibilities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, email, password, orders, eligibilities);
     }
 }
