@@ -5,6 +5,7 @@ import hu.unideb.inf.BookShop.service.dto.LoginDto;
 import hu.unideb.inf.BookShop.service.dto.RegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,5 +28,10 @@ public class AuthController {
     @PostMapping("/login")
     public String bejelentkezes(@RequestBody LoginDto dto){
         return service.login(dto);
+    }
+
+    @GetMapping("/user-email")
+    public String getUserEmail(Authentication authentication) {
+        return authentication.getName();
     }
 }

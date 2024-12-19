@@ -78,7 +78,8 @@ public class BookServiceImpl implements BookService {
                 bookDto.getPrice(),
                 bookDto.getAuthor(),
                 bookDto.getCategory(),
-                bookDto.getPublishYear()
+                bookDto.getPublishYear(),
+                bookDto.getCreatorEmail()
         );
     }
 
@@ -89,7 +90,8 @@ public class BookServiceImpl implements BookService {
                 bookEntity.getPrice(),
                 bookEntity.getAuthor(),
                 bookEntity.getCategory(),
-                bookEntity.getPublishYear()
+                bookEntity.getPublishYear(),
+                bookEntity.getCreatorEmail()
         );
     }
 }

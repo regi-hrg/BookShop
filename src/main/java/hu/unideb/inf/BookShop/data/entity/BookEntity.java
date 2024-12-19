@@ -29,18 +29,22 @@ public class BookEntity {
     @Column(name = "publish_year")
     private int publishYear;
 
+    @Column(name = "creatorEmail")
+    private String creatorEmail;
+
     @ManyToMany(mappedBy = "books")
     private Set<OrderEntity> orders = new HashSet<>();
 
     public BookEntity() {
     }
 
-    public BookEntity(String title, double price, String author, String category, int publishYear) {
+    public BookEntity(String title, double price, String author, String category, int publishYear, String creatorEmail) {
         this.title = title;
         this.price = price;
         this.author = author;
         this.category = category;
         this.publishYear = publishYear;
+        this.creatorEmail = creatorEmail;
     }
 
     public long getId() {
@@ -89,6 +93,14 @@ public class BookEntity {
 
     public void setPublishYear(int publishYear) {
         this.publishYear = publishYear;
+    }
+
+    public String getCreatorEmail() {
+        return creatorEmail;
+    }
+
+    public void setCreatorEmail(String creatorEmail) {
+        this.creatorEmail = creatorEmail;
     }
 
     public Set<OrderEntity> getOrders() {

@@ -1,5 +1,7 @@
 package hu.unideb.inf.BookShop.service.dto;
 
+import java.util.Objects;
+
 public class BookDto {
     private long id;
     private String title;
@@ -7,20 +9,21 @@ public class BookDto {
     private String author;
     private String category;
     private int publishYear;
+    private String creatorEmail;
 
     public BookDto() {
     }
 
-    public BookDto(long id, String title, double price, String author, String category, int publishYear) {
+    public BookDto(long id, String title, double price, String author, String category, int publishYear, String creatorEmail) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.author = author;
         this.category = category;
         this.publishYear = publishYear;
+        this.creatorEmail = creatorEmail;
     }
 
-    // Getters és Setters
     public long getId() {
         return id;
     }
@@ -67,5 +70,31 @@ public class BookDto {
 
     public void setPublishYear(int publishYear) {
         this.publishYear = publishYear;
+    }
+
+    public String getCreatorEmail() {
+        return creatorEmail;
+    }
+
+    public void setCreatorEmail(String creatorEmail) {
+        this.creatorEmail = creatorEmail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookDto bookDto = (BookDto) o;
+        return Objects.equals(id, bookDto.id ) &&
+                Double.compare(price, bookDto.price) == 0 &&
+                Objects.equals(publishYear, bookDto.publishYear) &&
+                Objects.equals(title, bookDto.title) &&
+                Objects.equals(author, bookDto.author) &&
+                Objects.equals(category, bookDto.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price, author, category, publishYear);
     }
 }

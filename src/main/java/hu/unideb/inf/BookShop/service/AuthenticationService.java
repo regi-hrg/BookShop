@@ -8,4 +8,6 @@ public interface AuthenticationService {
     String registration(RegistrationDto dto);
 
     String login(LoginDto dto);
+
+    Long getUsersIdByEmail(String email);
 }
