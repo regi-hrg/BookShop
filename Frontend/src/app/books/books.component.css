@@ -1,0 +1,161 @@
+:root {
+  --rose-primary: #d81b60;
+  --rose-secondary: #ad1457;
+  --rose-light: #f8bbd0;
+  --text-color: #ffffff;
+  --rose-third: #bb92d0;
+}
+
+.container {
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bb92d0;
+  padding: 10px 20px;
+  color: white;
+}
+
+.navbar-button {
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.2);
+  border: none;
+  border-radius: 20px;
+  background-color: #64d068;
+  margin-left: 270px;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  transition-duration: 0.3s ;
+}
+
+.navbar-button:hover {
+  background-color: #51bb55;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: #ffe5ee;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.reset-filter-button {
+  margin-bottom: 20px;
+}
+
+.sidebar-buttons {
+  padding: 10px;
+}
+
+.book-list {
+  margin-left: 270px;
+  padding: 20px;
+  flex: 1;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.add-to-cart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.add-to-cart-button {
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.2);
+  background-color: #d5d3d3;
+  border: none;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition-duration: 0.3s;
+}
+
+.add-to-cart-button:hover {
+  background-color: #ffc107;
+}
+
+
+.filter-input {
+  margin-bottom: 15px;
+}
+
+.yearFilter {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.logout-container.fixed-bottom-left {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+
+.btn-logout {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.btn-logout i {
+  margin-right: 8px;
+}
+
+.btn-logout:focus {
+  outline: none;
+}
+
+.btn-logout:active {
+  background-color: #bd2130;
+  transform: scale(0.98);
+}

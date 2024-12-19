@@ -1,0 +1,149 @@
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+<header class="navbar">
+  <button class="navbar-button" (click)="openCreateForm()">
+    <i class="bi bi-plus-circle"></i> Add New Book
+  </button>
+  <button class="navbar-button">
+    <i class="bi bi-cart2"></i> My Orders
+  </button>
+</header>
+<div class="logout-container">
+  <button class="btn btn-logout" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i> Logout
+  </button>
+</div>
+<div class="container">
+  <aside class="sidebar">
+    <h3>Filters:</h3>
+    <div class="d-flex flex-column">
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Search Title</mat-label>
+        <input
+          matInput
+          placeholder="Enter Title"
+          [(ngModel)]="filterTitle"
+          (ngModelChange)="filterBooks()"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Search Author</mat-label>
+        <input
+          matInput
+          placeholder="Enter Author"
+          [(ngModel)]="filterAuthor"
+          (ngModelChange)="filterBooks()"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Search Category</mat-label>
+        <input
+          matInput
+          placeholder="Enter Category"
+          [(ngModel)]="filterCategory"
+          (ngModelChange)="filterBooks()"
+        />
+      </mat-form-field>
+
+      <div class="yearFilter">
+        <mat-form-field appearance="outline" class="filter-input">
+          <mat-label>Min Year</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Enter Min Year"
+            [(ngModel)]="minYear"
+            (ngModelChange)="filterBooks()"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="filter-input">
+          <mat-label>Max Year</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Enter Max Year"
+            [(ngModel)]="maxYear"
+            (ngModelChange)="filterBooks()"
+          />
+        </mat-form-field>
+      </div>
+      <button class="reset-filter-button" mat-raised-button color="primary" (click)="resetFilters()">Reset Filters</button>
+      <div class="logout-container fixed-bottom-left">
+        <button class="btn btn-logout" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      </div>
+    </div>
+  </aside>
+
+
+  <main class="book-list">
+    <div class="book-grid">
+      <mat-card *ngFor="let book of filteredBooks; let i = index">
+        <mat-card-content>
+          <h3>{{ book.title }}</h3>
+          <p>Author: {{ book.author }}</p>
+          <p>Category: {{ book.category }}</p>
+          <p>Price: {{ book.price | currency: 'EUR' }}</p>
+          <p>Publish Year: {{ book.publishYear }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="book.creatorEmail === currentUserEmail"
+            mat-button color="warn" (click)="deleteBook(book.id)">Delete</button>
+          <button *ngIf="book.creatorEmail === currentUserEmail"
+            mat-button color="primary" (click)="openEditForm(book)">Edit</button>
+        </mat-card-actions>
+        <div class="add-to-cart-wrapper">
+          <button class="add-to-cart-button" (click)="addToCart(book)">
+            <i class="bi bi-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </main>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        {{ isEditMode ? 'Update Book' : 'Create New Book' }}
+      </h5>
+      <button mat-icon-button (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="currentBook.title" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Author</mat-label>
+        <input matInput [(ngModel)]="currentBook.author" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Category</mat-label>
+        <input matInput [(ngModel)]="currentBook.category" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Price</mat-label>
+        <input type="number" matInput [(ngModel)]="currentBook.price" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Publish Year</mat-label>
+        <input type="number" matInput [(ngModel)]="currentBook.publishYear" />
+      </mat-form-field>
+    </div>
+    <div class="modal-footer d-flex justify-content-end">
+      <button mat-raised-button color="primary" (click)="saveBook()">
+        {{ isEditMode ? 'Update' : 'Save' }}
+      </button>
+      <button mat-raised-button color="warn" class="ms-2" (click)="closeModal()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
